@@ -14,6 +14,7 @@ public class Input {
 
     public boolean yesNo() {
         System.out.println("Continue? [y/n]: ");
+
         scanner = new Scanner(System.in);
         if (this.scanner.nextLine().equalsIgnoreCase("y") || this.scanner.nextLine().equalsIgnoreCase("yes")) {
             return true;
@@ -24,9 +25,17 @@ public class Input {
     }
 
     public int getInt() {
-        System.out.println("Please enter an integer: ");
-        return scanner.nextInt();
-
+        try {
+            System.out.println("Please enter an integer: ");
+            String userInput = getString();
+            int number = Integer.valueOf(userInput);
+            System.out.println("Your number is " + number);
+            return number;
+        } catch (NumberFormatException e){
+            System.out.println("Oops!, try again");
+            System.out.println(e);
+            return getInt();
+        }
     }
 
     double getDouble(double min, double max) {
